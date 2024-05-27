@@ -30,8 +30,8 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="System.Device.Gpio" Version="3.1.0" />
-        <PackageReference Update="FSharp.Core" Version="8.0.300" />
+        <PackageReference Include="System.Device.Gpio" />
+        <PackageReference Include="FSharp.Core" />
     </ItemGroup>
 
 </Project>
