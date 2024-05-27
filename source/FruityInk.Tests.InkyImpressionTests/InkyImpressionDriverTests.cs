@@ -405,4 +405,56 @@ public class InkyImpressionDriverTests
 		AssertInitUC8159_7C();
 		AssertInitPowerOffSequence();
 	}
+
+	[Test]
+	public void PinHelper_DisplayButton_ButtonOne_MapsTo_GpioPinName_ButtonOne()
+	{
+		// Arrange
+		var inputButton = DisplayButton.ButtonOne;
+
+		// Act
+		var result = PinHelper.mapButtonToPin(inputButton);
+
+		// Assert
+		Assert.That(result, Is.EqualTo(GpioPinName.ButtonOne));
+	}
+
+	[Test]
+	public void PinHelper_DisplayButton_ButtonTwo_MapsTo_GpioPinName_ButtonTwo()
+	{
+		// Arrange
+		var inputButton = DisplayButton.ButtonTwo;
+
+		// Act
+		var result = PinHelper.mapButtonToPin(inputButton);
+
+		// Assert
+		Assert.That(result, Is.EqualTo(GpioPinName.ButtonTwo));
+	}
+
+	[Test]
+	public void PinHelper_DisplayButton_ButtonThree_MapsTo_GpioPinName_ButtonThree()
+	{
+		// Arrange
+		var inputButton = DisplayButton.ButtonThree;
+
+		// Act
+		var result = PinHelper.mapButtonToPin(inputButton);
+
+		// Assert
+		Assert.That(result, Is.EqualTo(GpioPinName.ButtonThree));
+	}
+
+	[Test]
+	public void PinHelper_DisplayButton_ButtonFour_MapsTo_GpioPinName_ButtonFour()
+	{
+		// Arrange
+		var inputButton = DisplayButton.ButtonFour;
+
+		// Act
+		var result = PinHelper.mapButtonToPin(inputButton);
+
+		// Assert
+		Assert.That(result, Is.EqualTo(GpioPinName.ButtonFour));
+	}
 }
