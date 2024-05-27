@@ -9,8 +9,8 @@ public class Array2DHelperTests
 	{
 		
 		// Arrange
-		var array2D = new int[,] { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
-		var expected = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+		var array2D = new[,] { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
+		var expected = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 		// Act
 		var actual = Array2DHelper.flatten(array2D);
@@ -23,8 +23,8 @@ public class Array2DHelperTests
 	public void TestFlipLeftRight()
 	{
 		// Arrange
-		var array2D = new int[,] { { 1, 2 }, { 3, 4 } };
-		var expected = new int[,] { { 2, 1 }, { 4, 3 } };
+		var array2D = new[,] { { 1, 2 }, { 3, 4 } };
+		var expected = new[,] { { 2, 1 }, { 4, 3 } };
 
 		// Act
 		var actual = Array2DHelper.flipLeftRight(array2D);
@@ -37,8 +37,8 @@ public class Array2DHelperTests
     public void TestFlipUpsideDown()
     {
         // Arrange
-        var array2D = new int[,] { { 1, 2 }, { 3, 4 } };
-        var expected = new int[,] { { 3, 4 }, { 1, 2 } };
+        var array2D = new[,] { { 1, 2 }, { 3, 4 } };
+        var expected = new[,] { { 3, 4 }, { 1, 2 } };
     
         // Act
         var actual = Array2DHelper.flipUpsideDown(array2D);
@@ -51,8 +51,8 @@ public class Array2DHelperTests
     public void TestRotateThrowsException()
     {
     	// Arrange
-    	var array2D = new int[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-    	var expected = new int[,] { { 3, 6, 9 }, { 2, 5, 8 }, { 1, 4, 7 } };
+    	var array2D = new[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+    	var expected = new[,] { { 3, 6, 9 }, { 2, 5, 8 }, { 1, 4, 7 } };
     
     	// Act
 	    var ex = Assert.Throws<Exception>(() => Array2DHelper.rotate(rotation: 1, array2D));

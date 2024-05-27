@@ -112,7 +112,7 @@ public class InkyImpressionDriverTests
 		var data = new byte[] { 0x01, 0xF4, 0x01, 0xC0 };
 		var expectedData = new byte[] { 0x01, 0xF4, 0x01, 0xC0 };
 
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_TRES }, expectedData: new byte[] { 0x61 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_TRES], expectedData: [0x61]);
 		TestSpiWrite(_SPI_DATA, data, expectedData: expectedData);
 	}
 
@@ -134,7 +134,7 @@ public class InkyImpressionDriverTests
 		};
 		var expectedData = new byte[] { 0xEF, 0x08 };
 
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_PSR }, expectedData: new byte[] { 0x00 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_PSR], expectedData: [0x00]);
 		TestSpiWrite(_SPI_DATA, data, expectedData: expectedData);
 	}
 
@@ -167,7 +167,7 @@ public class InkyImpressionDriverTests
 			0x23,
 		};
 
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_PWR }, expectedData: new byte[] { 0x01 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_PWR], expectedData: [0x01]);
 		TestSpiWrite(_SPI_DATA, data, expectedData: expectedData);
 	}
 
@@ -181,8 +181,8 @@ public class InkyImpressionDriverTests
 
 	private void AssertInitSetPllClockFrequency()
 	{
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_PLL }, expectedData: new byte[] { 0x30 });
-		TestSpiWrite(_SPI_DATA, new byte[] { 0x1C }, expectedData: new byte[] { 0x1C });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_PLL], expectedData: [0x30]);
+		TestSpiWrite(_SPI_DATA, [0x1C], expectedData: [0x1C]);
 	}
 
 	[Test]
@@ -195,8 +195,8 @@ public class InkyImpressionDriverTests
 
 	private void AssertInitSendTseRegisterToDisplay()
 	{
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_TSE }, expectedData: new byte[] { 0x41 });
-		TestSpiWrite(_SPI_DATA, new byte[] { 0x00 }, expectedData: new byte[] { 0x00 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_TSE], expectedData: [0x41]);
+		TestSpiWrite(_SPI_DATA, [0x00], expectedData: [0x00]);
 	}
 
 	[Test]
@@ -211,8 +211,8 @@ public class InkyImpressionDriverTests
 	{
 		const byte borderColor = 0x37; // BorderColor.White
 
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_CDI }, expectedData: new byte[] { 0x50 });
-		TestSpiWrite(_SPI_DATA, new byte[] { borderColor }, expectedData: new byte[] { 0x37 } );
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_CDI], expectedData: [0x50]);
+		TestSpiWrite(_SPI_DATA, [borderColor], expectedData: [0x37]);
 	}
 
 	[Test]
@@ -225,8 +225,8 @@ public class InkyImpressionDriverTests
 
 	private void AssertInitGateSourceNonOverlapPeriod()
 	{
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_TCON }, expectedData: new byte[] { 0x60 });
-		TestSpiWrite(_SPI_DATA, new byte[] { 0x22 }, expectedData: new byte[] { 0x22 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_TCON], expectedData: [0x60]);
+		TestSpiWrite(_SPI_DATA, [0x22], expectedData: [0x22]);
 	}
 
 	[Test]
@@ -239,8 +239,8 @@ public class InkyImpressionDriverTests
 
 	private void AssertInitDisableExternalFlash()
 	{
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_DAM }, expectedData: new byte[] { 0x65 });
-		TestSpiWrite(_SPI_DATA, new byte[] { 0x00 }, expectedData: new byte[] { 0x00 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_DAM], expectedData: [0x65]);
+		TestSpiWrite(_SPI_DATA, [0x00], expectedData: [0x00]);
 	}
 
 	[Test]
@@ -253,8 +253,8 @@ public class InkyImpressionDriverTests
 
 	private void AssertInitUC8159_7C()
 	{
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_PWS }, expectedData: new byte[] { 0xE3 });
-		TestSpiWrite(_SPI_DATA, new byte[] { 0xAA }, expectedData: new byte[] { 0xAA });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_PWS], expectedData: [0xE3]);
+		TestSpiWrite(_SPI_DATA, [0xAA], expectedData: [0xAA]);
 	}
 
 	[Test]
@@ -267,8 +267,8 @@ public class InkyImpressionDriverTests
 
 	private void AssertInitPowerOffSequence()
 	{
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_PFS }, expectedData: new byte[] { 0x03 });
-		TestSpiWrite(_SPI_DATA, new byte[] { 0x00 }, expectedData: new byte[] { 0x00 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_PFS], expectedData: [0x03]);
+		TestSpiWrite(_SPI_DATA, [0x00], expectedData: [0x00]);
 	}
 
 	[Test]
@@ -324,18 +324,18 @@ public class InkyImpressionDriverTests
 
 		TestResetDisplay();
 
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_DTM1 }, expectedData: new byte[] { 0x10 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_DTM1], expectedData: [0x10]);
 		TestSpiWrite(_SPI_DATA, flattenedData, expectedData: expectedData);
 
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_PON }, expectedData: new byte[] { 0x04 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_PON], expectedData: [0x04]);
 		A.CallTo(() => _fakeGpioHelper.WaitForBusyPin(GpioPinName.Busy, TimeSpan.FromMilliseconds(210)))
 			.MustHaveHappenedOnceExactly();
 
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_DRF }, expectedData: new byte[] { 0x04 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_DRF], expectedData: [0x04]);
 		A.CallTo(() => _fakeGpioHelper.WaitForBusyPin(GpioPinName.Busy, TimeSpan.FromSeconds(32)))
 			.MustHaveHappenedOnceExactly();
 
-		TestSpiWrite(_SPI_COMMAND, new byte[] { (byte)UCBytes.UC8159_PON }, expectedData: new byte[] { 0x04 });
+		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_PON], expectedData: [0x04]);
 		A.CallTo(() => _fakeGpioHelper.WaitForBusyPin(GpioPinName.Busy, TimeSpan.FromMilliseconds(200)))
 			.MustHaveHappenedOnceExactly();
 	}
