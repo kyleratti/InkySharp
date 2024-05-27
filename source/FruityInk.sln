@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Driver", "Driver", "{143DED2C-206F-4691-8512-FB20B59BE5DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3589AE45-13E4-44B5-8D43-A0D77AFBAD1F}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FruityInk.Driver.InkyImpression", "FruityInk.Driver.InkyImpression\FruityInk.Driver.InkyImpression.fsproj", "{79DB3EE3-BFA7-4AD9-BEC3-5206642C5A70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FruityInk.Tests.InkyImpressionTests", "FruityInk.Tests.InkyImpressionTests\FruityInk.Tests.InkyImpressionTests.csproj", "{77324D9A-91B7-4F02-A960-6DC93D647529}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{79DB3EE3-BFA7-4AD9-BEC3-5206642C5A70} = {143DED2C-206F-4691-8512-FB20B59BE5DB}
+		{77324D9A-91B7-4F02-A960-6DC93D647529} = {3589AE45-13E4-44B5-8D43-A0D77AFBAD1F}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79DB3EE3-BFA7-4AD9-BEC3-5206642C5A70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79DB3EE3-BFA7-4AD9-BEC3-5206642C5A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79DB3EE3-BFA7-4AD9-BEC3-5206642C5A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79DB3EE3-BFA7-4AD9-BEC3-5206642C5A70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77324D9A-91B7-4F02-A960-6DC93D647529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77324D9A-91B7-4F02-A960-6DC93D647529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77324D9A-91B7-4F02-A960-6DC93D647529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77324D9A-91B7-4F02-A960-6DC93D647529}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
