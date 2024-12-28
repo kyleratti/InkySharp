@@ -1,0 +1,51 @@
+name: "Publish Release"
+
+on:
+  workflow_dispatch
+
+# Allow one run of this workflow per branch and cancel existing runs if triggered again
+concurrency:
+  group: inkysharp-publish-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write # Needed to push tags
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: Publish
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0' # Load entire history
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.x'
+      - run: dotnet tool restore
+      - name: Generate Version
+        id: generate-version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          dotnet tool run versionize
+          cd ./source/
+          echo "RELEASE_VERSION_NUMBER=$(dotnet tool run versionize inspect)" >> $GITHUB_OUTPUT
+          git push --follow-tags
+          git fetch --tags origin
+      - run: dotnet restore
+      - run: dotnet build --no-restore -c Release -p:Version=${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}
+      - run: dotnet pack --no-build --no-restore --nologo --output=dist -c Release
+      - run: gh release create "v${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}" --notes-file CHANGELOG.md "dist/FruityFoundation.Base.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" "dist/FruityFoundation.Db.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" "dist/FruityFoundation.FsBase.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" "dist/FruityFoundation.DataAccess.Abstractions.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" "dist/FruityFoundation.DataAccess.Core.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" "dist/FruityFoundation.DataAccess.Sqlite.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg"
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Publish to NuGet
+        run: |
+          cd ./dist/
+          dotnet nuget push "InkySharp.Driver.Base.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" --api-key=${{ secrets.NUGET_API_KEY }} --source=https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push "FruityFoundation.FsBase.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" --api-key=${{ secrets.NUGET_API_KEY }} --source=https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push "FruityFoundation.Db.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" --api-key=${{ secrets.NUGET_API_KEY }} --source=https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push "FruityFoundation.DataAccess.Abstractions.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" --api-key=${{ secrets.NUGET_API_KEY }} --source=https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push "FruityFoundation.DataAccess.Abstractions.FSharp.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" --api-key=${{ secrets.NUGET_API_KEY }} --source=https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push "FruityFoundation.DataAccess.Core.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" --api-key=${{ secrets.NUGET_API_KEY }} --source=https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push "FruityFoundation.DataAccess.Sqlite.${{ steps.generate-version.outputs.RELEASE_VERSION_NUMBER }}.nupkg" --api-key=${{ secrets.NUGET_API_KEY }} --source=https://api.nuget.org/v3/index.json --skip-duplicate
