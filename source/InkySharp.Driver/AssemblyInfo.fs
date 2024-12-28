@@ -2,5 +2,5 @@
 
 open System.Runtime.CompilerServices
 
-[<assembly: InternalsVisibleTo("InkySharp.Tests.InkyImpressionTests")>]
+[<assembly: InternalsVisibleTo("InkySharp.Tests.DriverTests")>]
 do()

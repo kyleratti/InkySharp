@@ -1,4 +1,4 @@
-﻿namespace InkySharp.Driver.InkyImpression.GpioControllerWrapper
+﻿namespace InkySharp.Driver.GpioControllerWrapper
 
 open System.Device.Gpio
 open System.Diagnostics.CodeAnalysis

@@ -1,11 +1,11 @@
-﻿namespace InkySharp.Driver.InkyImpression.InkyGpioWrapper
+﻿namespace InkySharp.Driver.InkyGpioWrapper
 
 open System
 open System.Device.Gpio
 open System.Diagnostics
 open System.Threading.Tasks
-open InkySharp.Driver.InkyImpression.GpioControllerWrapper
-open InkySharp.Driver.InkyImpression.SpiDeviceWrapper
+open InkySharp.Driver.GpioControllerWrapper
+open InkySharp.Driver.SpiDeviceWrapper
 
 [<RequireQualifiedAccess>]
 type DisplayButton =

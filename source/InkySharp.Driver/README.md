@@ -10,7 +10,7 @@ The only supported Inky display is the 5.7" display as this is the only hardware
 
 ```csharp
 using var gpioController = new System.Device.Gpio.GpioController(System.Device.Gpio.PinNumberingScheme.Logical);
-var gpioControllerWrapper = new InkySharp.Driver.InkyImpression.GpioControllerWrapper.GpioControllerWrapper(gpioController);
+var gpioControllerWrapper = new InkySharp.Driver.GpioControllerWrapper.GpioControllerWrapper(gpioController);
 
 var spiConnectionSettings = new System.Device.Spi.SpiConnectionSettings(busId: 0);
 using var spiDevice = System.Device.Spi.SpiDevice.Create(spiConnectionSettings);
@@ -27,7 +27,7 @@ var colors = inky.GetPaletteBlendFromSaturation(saturation: 0.7f)
   .Select(x => new SixLabors.ImageSharp.Color(x))
   .ToArray();
 
-inky.SetBorderColor(InkySharp.Driver.InkyImpression.InkyImpressionWrapper.DisplayColor.White);
+inky.SetBorderColor(InkySharp.Driver.InkyImpressionWrapper.DisplayColor.White);
 
 const string imagePath = "image.jpg";
 await using var imageStream = System.IO.File.OpenRead(imagePath);
