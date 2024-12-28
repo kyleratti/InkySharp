@@ -1,0 +1,19 @@
+{
+  "publicReleaseRefSpec": ["^refs/heads/main$", "^refs/tags/v\\d+\\.\\d+"],
+  "cloudBuild": {
+    "setVersionVariables": true,
+    "buildNumber": {
+      "enabled": false,
+      "includeCommitId": {
+        "when": "nonPublicReleaseOnly",
+        "where": "buildMetadata"
+      }
+    }
+  },
+  "release": {
+    "branchName": "v{version}",
+    "versionIncrement": "minor",
+    "firstUnstableTag": "alpha"
+  },
+  "inherit": false
+}

@@ -4,12 +4,11 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>Kyle Ratti</Authors>
-        <PackageProjectUrl>https://github.com/kyleratti/FruityInk</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/kyleratti/InkySharp</PackageProjectUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <RepositoryUrl>https://github.com/kyleratti/FruityInk</RepositoryUrl>
+        <RepositoryUrl>https://github.com/kyleratti/InkySharp</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
