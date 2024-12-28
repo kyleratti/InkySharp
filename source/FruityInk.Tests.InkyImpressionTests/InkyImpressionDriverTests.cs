@@ -328,15 +328,16 @@ public class InkyImpressionDriverTests
 		TestSpiWrite(_SPI_DATA, flattenedData, expectedData: expectedData);
 
 		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_PON], expectedData: [0x04]);
-		A.CallTo(() => _fakeGpioHelper.WaitForBusyPin(GpioPinName.Busy, TimeSpan.FromMilliseconds(210)))
+		const double tolerance = 0.00001;
+		A.CallTo(() => _fakeGpioHelper.WaitForBusyPin(GpioPinName.Busy, A<TimeSpan>.That.Matches(x => Math.Abs(x.TotalMilliseconds - 210L) < tolerance)))
 			.MustHaveHappenedOnceExactly();
 
 		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_DRF], expectedData: [0x04]);
-		A.CallTo(() => _fakeGpioHelper.WaitForBusyPin(GpioPinName.Busy, TimeSpan.FromSeconds(32)))
+		A.CallTo(() => _fakeGpioHelper.WaitForBusyPin(GpioPinName.Busy, TimeSpan.FromSeconds(32L)))
 			.MustHaveHappenedOnceExactly();
 
 		TestSpiWrite(_SPI_COMMAND, [(byte)UCBytes.UC8159_PON], expectedData: [0x04]);
-		A.CallTo(() => _fakeGpioHelper.WaitForBusyPin(GpioPinName.Busy, TimeSpan.FromMilliseconds(200)))
+		A.CallTo(() => _fakeGpioHelper.WaitForBusyPin(GpioPinName.Busy, A<TimeSpan>.That.Matches(x => Math.Abs(x.TotalMilliseconds - 200L) < tolerance)))
 			.MustHaveHappenedOnceExactly();
 	}
 

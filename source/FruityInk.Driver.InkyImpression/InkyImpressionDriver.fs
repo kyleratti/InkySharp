@@ -400,7 +400,13 @@ type internal InkyImpressionDriver (
             do! Task.Delay (TimeSpan.FromMilliseconds 100)
             gpio.Write(int resetPin, PinValue.High)
 
-            do! gpioHelper.WaitForBusyPin (busyPin, (TimeSpan.FromSeconds 40))
+#if NET_9_0_OR_GREATER
+            let timespan = TimeSpan.FromSeconds 40L
+#else
+            let timespan = TimeSpan.FromSeconds (float 40)
+#endif
+
+            do! gpioHelper.WaitForBusyPin (busyPin, timespan)
         }
 
         member this.SetBorderColor (color : DisplayColor) = borderColor <- color
@@ -421,7 +427,12 @@ type internal InkyImpressionDriver (
             do! gpioHelper.WaitForBusyPin (busyPin, (TimeSpan.FromMilliseconds 210))
 
             sendCommand UCBytes.UC8159_DRF
-            do! gpioHelper.WaitForBusyPin (busyPin, (TimeSpan.FromSeconds 32))
+#if NET_9_0_OR_GREATER
+            let timespan = TimeSpan.FromSeconds 32
+#else
+            let timespan = TimeSpan.FromSeconds (float 32)
+#endif
+            do! gpioHelper.WaitForBusyPin (busyPin, timespan)
 
             sendCommand UCBytes.UC8159_POF
             do! gpioHelper.WaitForBusyPin (busyPin, (TimeSpan.FromMilliseconds 200))
