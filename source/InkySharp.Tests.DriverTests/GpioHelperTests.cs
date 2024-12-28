@@ -1,9 +1,9 @@
 ﻿using System.Device.Gpio;
 using FakeItEasy;
-using InkySharp.Driver.InkyImpression.GpioControllerWrapper;
-using InkySharp.Driver.InkyImpression.InkyGpioWrapper;
+using InkySharp.Driver.GpioControllerWrapper;
+using InkySharp.Driver.InkyGpioWrapper;
 
-namespace InkySharp.Tests.InkyImpressionTests;
+namespace InkySharp.Tests.DriverTests;
 
 public class GpioHelperTests
 {

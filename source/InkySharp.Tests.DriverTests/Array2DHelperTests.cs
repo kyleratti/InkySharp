@@ -1,6 +1,6 @@
-﻿using InkySharp.Driver.InkyImpression.InkyGpioWrapper;
+﻿using InkySharp.Driver.InkyGpioWrapper;
 
-namespace InkySharp.Tests.InkyImpressionTests;
+namespace InkySharp.Tests.DriverTests;
 
 public class Array2DHelperTests
 {

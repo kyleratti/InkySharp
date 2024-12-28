@@ -37,7 +37,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\InkySharp.Driver.InkyImpression\InkySharp.Driver.InkyImpression.fsproj" />
+      <ProjectReference Include="..\InkySharp.Driver\InkySharp.Driver.fsproj" />
     </ItemGroup>
 
 </Project>
