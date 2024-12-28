@@ -1,12 +1,12 @@
-﻿namespace FruityInk.Driver.InkyImpression.InkyImpressionDriver
+﻿namespace InkySharp.Driver.InkyImpression.InkyImpressionDriver
 
 open System
 open System.Device.Gpio
 open System.Diagnostics.CodeAnalysis
 open System.Threading.Tasks
-open FruityInk.Driver.InkyImpression.InkyGpioWrapper
-open FruityInk.Driver.InkyImpression.SpiDeviceWrapper
-open FruityInk.Driver.InkyImpression.GpioControllerWrapper
+open InkySharp.Driver.InkyImpression.InkyGpioWrapper
+open InkySharp.Driver.InkyImpression.SpiDeviceWrapper
+open InkySharp.Driver.InkyImpression.GpioControllerWrapper
 
 type DType =
     | UInt8

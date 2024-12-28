@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using FruityInk.Driver.InkyImpression.InkyGpioWrapper;
+using InkySharp.Driver.InkyImpression.InkyGpioWrapper;
 
-namespace FruityInk.Tests.InkyImpressionTests;
+namespace InkySharp.Tests.InkyImpressionTests;
 
 [SuppressMessage("Assertion", "NUnit2021:Incompatible types for EqualTo constraint", Justification = "The analyzer is wrongly flagging a string and const string as being incompatible.")]
 public class DisplayColorTests

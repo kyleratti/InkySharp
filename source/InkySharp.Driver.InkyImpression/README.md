@@ -1,4 +1,4 @@
-# `FruityInk.Driver.InkyImpression`
+# `InkySharp.Driver.InkyImpression`
 
 This is an unofficial .NET library for the [Inky Impression 5.7" 7-color e-ink display](https://shop.pimoroni.com/products/inky-impression-5-7?variant=32298701324371) produced by Pimoroni. The library is largely reverse engineered from [Pimoroni's Python library](https://github.com/pimoroni/inky).
 
@@ -10,11 +10,11 @@ The only supported Inky display is the 5.7" display as this is the only hardware
 
 ```csharp
 using var gpioController = new System.Device.Gpio.GpioController(System.Device.Gpio.PinNumberingScheme.Logical);
-var gpioControllerWrapper = new FruityInk.Driver.InkyImpression.GpioControllerWrapper.GpioControllerWrapper(gpioController);
+var gpioControllerWrapper = new InkySharp.Driver.InkyImpression.GpioControllerWrapper.GpioControllerWrapper(gpioController);
 
 var spiConnectionSettings = new System.Device.Spi.SpiConnectionSettings(busId: 0);
 using var spiDevice = System.Device.Spi.SpiDevice.Create(spiConnectionSettings);
-var spiDeviceWrapper = new FruityInk.Driver.InkiImpression.SpiDeviceWrapper.SpiDeviceWrapper(spiDevice);
+var spiDeviceWrapper = new InkySharp.Driver.InkiImpression.SpiDeviceWrapper.SpiDeviceWrapper(spiDevice);
 
 IInkyImpressionWrapper inky = InkyImpressionWrapper.Create(
   isHorizontalFlipped: false,
@@ -27,7 +27,7 @@ var colors = inky.GetPaletteBlendFromSaturation(saturation: 0.7f)
   .Select(x => new SixLabors.ImageSharp.Color(x))
   .ToArray();
 
-inky.SetBorderColor(FruityInk.Driver.InkyImpression.InkyImpressionWrapper.DisplayColor.White);
+inky.SetBorderColor(InkySharp.Driver.InkyImpression.InkyImpressionWrapper.DisplayColor.White);
 
 const string imagePath = "image.jpg";
 await using var imageStream = System.IO.File.OpenRead(imagePath);

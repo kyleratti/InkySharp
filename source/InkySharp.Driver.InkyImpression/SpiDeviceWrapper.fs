@@ -1,4 +1,4 @@
-﻿namespace FruityInk.Driver.InkyImpression.SpiDeviceWrapper
+﻿namespace InkySharp.Driver.InkyImpression.SpiDeviceWrapper
 
 open System
 open System.Device.Spi

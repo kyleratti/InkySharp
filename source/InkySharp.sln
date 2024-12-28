@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Driver", "Driver", "{143DED
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3589AE45-13E4-44B5-8D43-A0D77AFBAD1F}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FruityInk.Driver.InkyImpression", "FruityInk.Driver.InkyImpression\FruityInk.Driver.InkyImpression.fsproj", "{79DB3EE3-BFA7-4AD9-BEC3-5206642C5A70}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "InkySharp.Driver.InkyImpression", "InkySharp.Driver.InkyImpression\InkySharp.Driver.InkyImpression.fsproj", "{79DB3EE3-BFA7-4AD9-BEC3-5206642C5A70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FruityInk.Tests.InkyImpressionTests", "FruityInk.Tests.InkyImpressionTests\FruityInk.Tests.InkyImpressionTests.csproj", "{77324D9A-91B7-4F02-A960-6DC93D647529}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkySharp.Tests.InkyImpressionTests", "InkySharp.Tests.InkyImpressionTests\InkySharp.Tests.InkyImpressionTests.csproj", "{77324D9A-91B7-4F02-A960-6DC93D647529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

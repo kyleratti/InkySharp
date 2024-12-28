@@ -1,10 +1,10 @@
 ﻿using FakeItEasy;
-using FruityInk.Driver.InkyImpression.GpioControllerWrapper;
-using FruityInk.Driver.InkyImpression.InkyGpioWrapper;
-using FruityInk.Driver.InkyImpression.InkyImpressionDriver;
-using FruityInk.Driver.InkyImpression.SpiDeviceWrapper;
+using InkySharp.Driver.InkyImpression.GpioControllerWrapper;
+using InkySharp.Driver.InkyImpression.InkyGpioWrapper;
+using InkySharp.Driver.InkyImpression.InkyImpressionDriver;
+using InkySharp.Driver.InkyImpression.SpiDeviceWrapper;
 
-namespace FruityInk.Tests.InkyImpressionTests;
+namespace InkySharp.Tests.InkyImpressionTests;
 
 public class InkyImpressionWrapperTests
 {
