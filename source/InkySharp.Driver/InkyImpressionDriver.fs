@@ -148,8 +148,9 @@ type GpioHelper (gpio : IGpioControllerWrapper) =
                 // then wait for it to high.
                 let startTime = Stopwatch.StartNew ()
                 while gpio.Read(int pin) = PinValue.Low do
-                    do! Task.Delay (TimeSpan.FromMilliseconds 10)
+                    do! Task.Delay (TimeSpan.FromMilliseconds 10.0)
                     let elapsed = startTime.Elapsed
+
                     if elapsed > timeout then
                         // FIXME: this should be a logger
                         raise (TimeoutException (sprintf "Timeout waiting for busy signal to clear after %.2f seconds" timeout.TotalSeconds))
@@ -357,14 +358,10 @@ type internal InkyImpressionDriver (
             isInitialized <- true
 
             gpio.Write(int resetPin, PinValue.Low)
-            do! Task.Delay (TimeSpan.FromMilliseconds 100)
+            do! Task.Delay (TimeSpan.FromMilliseconds 100.0)
             gpio.Write(int resetPin, PinValue.High)
 
-#if NET_9_0_OR_GREATER
-            let timespan = TimeSpan.FromSeconds 40L
-#else
             let timespan = TimeSpan.FromSeconds (float 40)
-#endif
 
             do! gpioHelper.WaitForBusyPin (busyPin, timespan)
         }
@@ -384,18 +381,14 @@ type internal InkyImpressionDriver (
             sendCommandWithData UCBytes.UC8159_DTM1 data
 
             sendCommand UCBytes.UC8159_PON
-            do! gpioHelper.WaitForBusyPin (busyPin, (TimeSpan.FromMilliseconds 210))
+            do! gpioHelper.WaitForBusyPin (busyPin, (TimeSpan.FromMilliseconds 210.0))
 
             sendCommand UCBytes.UC8159_DRF
-#if NET_9_0_OR_GREATER
-            let timespan = TimeSpan.FromSeconds 32
-#else
             let timespan = TimeSpan.FromSeconds (float 32)
-#endif
             do! gpioHelper.WaitForBusyPin (busyPin, timespan)
 
             sendCommand UCBytes.UC8159_POF
-            do! gpioHelper.WaitForBusyPin (busyPin, (TimeSpan.FromMilliseconds 200))
+            do! gpioHelper.WaitForBusyPin (busyPin, (TimeSpan.FromMilliseconds 200.0))
         }
 
         member this.ResetDisplay () =

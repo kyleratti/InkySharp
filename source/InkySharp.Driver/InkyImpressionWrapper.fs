@@ -84,7 +84,7 @@ module InkyImpression_5_7Colors =
         //|> Seq.append [0uy, 0uy, 0uy] // FIXME: we might not need this
         |> Seq.toArray
 
-    let getPaletteBlendAsUInt (saturation : float) : uint array =
+    let getPaletteBlendAsUInt (saturation : float) : uint list =
         (*Array.init 7 (fun i ->
             let i = i-1 // For Array.init, i starts at 1, not 0
             let saturatedColors = saturatedColorPalette[i] |> Array.map (fun c -> float c * saturation)
@@ -114,10 +114,10 @@ module InkyImpression_5_7Colors =
         palette
         //|> Seq.append [0xFFFFFFu] // index 7 / white
         //|> Seq.append [0u; 0u; 0u] // FIXME: we might not need this
-        |> Seq.toArray
+        //|> Seq.toList
 
 type IInkyImpressionWrapper =
-    abstract member GetPaletteBlendFromSaturation : saturation : float -> uint array
+    abstract member GetPaletteBlendFromSaturation : saturation : float -> uint list
     abstract member SetPixel : x:int * y:int * color:DisplayColor -> unit
     abstract member GetPixels : unit -> DisplayColor array2d
     abstract member SetBorderColor : DisplayColor -> unit

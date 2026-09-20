@@ -27,13 +27,13 @@ let private resizeRetainAspectRatio width height (image : Rgba32 Image) =
 let internal displayColorMap =
     let rgb (r : int) (g : int) (b : int) = Rgba32 (byte r, byte g, byte b)
     [
-        (rgb 0x0c 0x0c 0x0e, DisplayColor.Black)
-        (rgb 0xd2 0xd2 0xd0, DisplayColor.White)
-        (rgb 0x1e 0x60 0x1f, DisplayColor.Green)
-        (rgb 0x1d 0x1e 0xaa, DisplayColor.Blue)
-        (rgb 0x8c 0x1b 0x1d, DisplayColor.Red)
-        (rgb 0xd3 0xc9 0x3d, DisplayColor.Yellow)
-        (rgb 0xc1 0x71 0x2a, DisplayColor.Orange)
+        (rgb 012 012 014, DisplayColor.Black)
+        (rgb 210 210 208, DisplayColor.White)
+        (rgb 030 096 031, DisplayColor.Green)
+        (rgb 029 030 170, DisplayColor.Blue)
+        (rgb 140 027 029, DisplayColor.Red)
+        (rgb 211 201 061, DisplayColor.Yellow)
+        (rgb 193 113 042, DisplayColor.Orange)
     ]
 
 let private applyDithering (displayColors : Color list) ditherType ditherScale (image : Rgba32 Image) =
@@ -59,7 +59,7 @@ let internal findClosestColor (colors : (Rgba32 * DisplayColor) seq) (target : R
 
     colors
     |> Seq.minBy (fst >> squaredDistance target)
-    |> fun (_, displayColor) -> displayColor
+    |> snd
 
 let private setPixel (wrapper : IInkyImpressionWrapper) x y displayColor =
     (x, y, displayColor)
@@ -100,14 +100,25 @@ let private sendImageToDisplay (logger : ILogger)
     logger.LogDebug ("Updated display in {ElapsedSeconds} seconds", stopwatch.Elapsed.TotalSeconds)
 }
 
+type OilPaintOptions =
+    { Levels : int32
+      BrushSize : int32 }
+
+type RenderOptions =
+    { DitherType : IDither option
+      DitherScale : float32 option
+      Saturation : float option
+      OilPaint : OilPaintOptions option }
+    static member Default = { DitherType = None; DitherScale = None; Saturation = None ; OilPaint = None }
+
 type DisplayCommunicationService (
-     logger : ILogger<DisplayCommunicationService>
+     logger : DisplayCommunicationService ILogger
     ,inkyImpressionWrapper : IInkyImpressionWrapper
     ,displayAccessOrchestrator : DisplayAccessOrchestrator
 ) =
     let mutable isDisplayInitialized = false
 
-    let initializeDisplayIfNotInitialized () = task {
+    let initializeDisplayIfNotInitialized () = backgroundTask {
         // There are safeguards in the driver to prevent bad things from happening if you try to initialize the display twice.
         // But let's just be extra safe.
         if isDisplayInitialized then return () else
@@ -120,7 +131,7 @@ type DisplayCommunicationService (
         logger.LogDebug("Display initialized in {ElapsedSeconds} sec.", initializationStopwatch.Elapsed.TotalSeconds);
     }
 
-    member _.SetBorderColor (color : DisplayColor , cancellationToken : CancellationToken) = task {
+    member _.SetBorderColor (color : DisplayColor , cancellationToken : CancellationToken) = backgroundTask {
         use! _lock = displayAccessOrchestrator.ObtainExclusiveAccess cancellationToken
         do! initializeDisplayIfNotInitialized ()
 
@@ -129,16 +140,22 @@ type DisplayCommunicationService (
 
     member _.SendImageToDisplay (
          image : Rgba32 Image
-        ,ditherType : IDither option
-        ,ditherScale : float32 option
+        ,renderOptions: RenderOptions
         ,cancellationToken
     ) = task {
         use! _lock = displayAccessOrchestrator.ObtainExclusiveAccess cancellationToken
         do! initializeDisplayIfNotInitialized ()
 
-        let ditherType = ditherType |> Option.defaultValue KnownDitherings.FloydSteinberg
-        let ditherScale = ditherScale |> Option.defaultValue 0.5f
-        let displayColors = displayColorMap |> Seq.map fst |> Seq.map Color |> Seq.toList // FIXME:
+        let ditherType = renderOptions.DitherType |> Option.defaultValue KnownDitherings.FloydSteinberg
+        let ditherScale = renderOptions.DitherScale |> Option.defaultValue 0.5f
+        let displayColors =
+            renderOptions.Saturation
+            |> Option.defaultValue 0.5
+            |> inkyImpressionWrapper.GetPaletteBlendFromSaturation
+            |> Seq.map (Rgba32 >> Color)
+            |> List.ofSeq
+            
+        //let displayColors = displayColorMap |> Seq.map fst |> Seq.map Color |> Seq.toList // FIXME:
 
         do! image
             |> sendImageToDisplay logger inkyImpressionWrapper displayColors (ditherType, ditherScale) cancellationToken
